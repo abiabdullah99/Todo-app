@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import UseTask from "../../Hooks/UseTask";
+// import UseTask from "../../Hooks/UseTask";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -49,9 +50,10 @@ const Home = () => {
   };
 
 //   Update Single Data 
-  const handleUpdate = (task) => {
-
-  }
+const navigate = useNavigate();
+const navigateToDetails = (id) => {
+  navigate(`/update/${id}`);
+};
   return (
     <div className="w-4/12 mx-auto my-40 mt-60 font-mono">
       <form
@@ -86,7 +88,7 @@ const Home = () => {
             </div>
             <div class="card-actions justify-end">
               <button
-                onClick={() => handleUpdate()}
+                onClick={() => navigateToDetails(item._id)}
                 class="btn hover:bg-transparent hover:text-pink-600 hover:border-2 hover:border-pink-600 bg-pink-600 text-white ml-2 rounded"
               >
                 Update
