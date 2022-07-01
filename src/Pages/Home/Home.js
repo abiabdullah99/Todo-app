@@ -32,8 +32,9 @@ const Home = () => {
   }, []);
   const reverse = [...taskitems].reverse();
 
+  const [Mytask, setMyTask] = useState([]);
 
-  const handleCompelete = (task) => {
+  const handleCompelete = (task, id) => {
     const items = {
       complet: task,
     };
@@ -48,13 +49,23 @@ const Home = () => {
       .then((result) => {
         toast.success("Task Compelete");
       });
+
+    const url = `https://bagged-worms-62459.herokuapp.com/tasks/${id}`;
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const reamingData = Mytask.filter((product) => product._id !== id);
+        setMyTask(reamingData);
+      });
   };
 
-//   Update Single Data 
-const navigate = useNavigate();
-const navigateToDetails = (id) => {
-  navigate(`/update/${id}`);
-};
+  //   Update Single Data
+  const navigate = useNavigate();
+  const navigateToDetails = (id) => {
+    navigate(`/update/${id}`);
+  };
   return (
     <div className="w-4/12 mx-auto my-40 mt-60 font-mono">
       <form
@@ -78,7 +89,7 @@ const navigateToDetails = (id) => {
           <div class="card-body grid grid-cols-3 items-center">
             <div>
               <input
-                onClick={() => handleCompelete(item.task)}
+                onClick={() => handleCompelete(item.task, item._id)}
                 type="checkbox"
                 name="terms"
                 id="terms"

@@ -6,7 +6,7 @@ const UpdateTask = () => {
 
   const [update, setUpdate] = useState([]);
   useEffect(() => {
-    const url = `https://bagged-worms-62459.herokuapp.com//tasks/${id}`;
+    const url = `https://bagged-worms-62459.herokuapp.com/tasks/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setUpdate(data));
@@ -21,7 +21,7 @@ const UpdateTask = () => {
     const updatedUser = { task };
 
     // send data to the server
-    const url = `http://localhost:5000/tasks/${id}`;
+    const url = `https://bagged-worms-62459.herokuapp.com/tasks/${id}`;
     fetch(url, {
       method: "PUT",
       headers: {
@@ -36,7 +36,7 @@ const UpdateTask = () => {
         event.target.reset();
       });
   };
-  console.log(update);
+
   return (
     <div class="hero mt-28">
       <div class="hero-content text-center font-mono">
