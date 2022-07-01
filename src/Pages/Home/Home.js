@@ -9,7 +9,7 @@ const Home = () => {
 
   //   Post a Task =============
   const onSubmitFrom = (data) => {
-    fetch("http://localhost:5000/tasks", {
+    fetch("https://bagged-worms-62459.herokuapp.com/tasks", {
       method: "POST",
       headers: {
         "content-type": "application/json; charset=UTF-8",
@@ -26,7 +26,7 @@ const Home = () => {
 
   const [taskitems, setTaskItems] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/tasks")
+    fetch("https://bagged-worms-62459.herokuapp.com/tasks")
       .then((res) => res.json())
       .then((data) => setTaskItems(data));
   }, []);
@@ -37,7 +37,7 @@ const Home = () => {
     const items = {
       complet: task,
     };
-    fetch("http://localhost:5000/complete", {
+    fetch("https://bagged-worms-62459.herokuapp.com/complete", {
       method: "POST",
       headers: {
         "content-type": "application/json; charset=UTF-8",

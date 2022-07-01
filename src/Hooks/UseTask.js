@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const UseTask = () => {
 const [taskitems, setTaskItems] = useState([])  
 useEffect(() => {
-    fetch("http://localhost:5000/tasks")
+    fetch("https://bagged-worms-62459.herokuapp.com/tasks")
       .then((res) => res.json())
       .then((data) => setTaskItems(data));
   }, []);

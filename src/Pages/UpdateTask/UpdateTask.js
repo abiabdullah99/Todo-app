@@ -6,7 +6,7 @@ const UpdateTask = () => {
 
   const [update, setUpdate] = useState([]);
   useEffect(() => {
-    const url = `http://localhost:5000/tasks/${id}`;
+    const url = `https://bagged-worms-62459.herokuapp.com//tasks/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setUpdate(data));
