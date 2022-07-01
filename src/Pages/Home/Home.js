@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-// import UseTask from "../../Hooks/UseTask";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
+import UseTask from "../../Hooks/UseTask";
 
 const Home = () => {
   const { register, handleSubmit, reset } = useForm();
-
   //   Post a Task =============
   const onSubmitFrom = (data) => {
     fetch("https://bagged-worms-62459.herokuapp.com/tasks", {
@@ -23,13 +23,7 @@ const Home = () => {
     reset();
   };
   // Get All Data =============
-
-  const [taskitems, setTaskItems] = useState([]);
-  useEffect(() => {
-    fetch("https://bagged-worms-62459.herokuapp.com/tasks")
-      .then((res) => res.json())
-      .then((data) => setTaskItems(data));
-  }, []);
+  const [taskitems, loading] = UseTask();
   const reverse = [...taskitems].reverse();
 
   const [Mytask, setMyTask] = useState([]);
@@ -67,13 +61,13 @@ const Home = () => {
     navigate(`/update/${id}`);
   };
   return (
-    <div className="w-4/12 mx-auto my-40 mt-60 font-mono">
+    <div className="md:w-4/12 w-11/12 mx-auto my-40 mt-60 font-mono">
       <form
         onSubmit={handleSubmit(onSubmitFrom)}
         className="flex w-11/12 mx-auto"
       >
         <input
-          className="w-80 rounded border-2 text-xl text-pink-600 border-pink-600 input input-bordered mb-5 py-4 pr-4"
+          className="w-10/12 rounded border-2 text-xl text-pink-600 border-pink-600 input input-bordered mb-5 py-4 pr-4"
           placeholder="Enter Your Task"
           type="text"
           {...register("task", { required: true })}
@@ -84,6 +78,11 @@ const Home = () => {
           value="Submit"
         />
       </form>
+      {loading && (
+        <div className="mt-20 ml-10">
+          <Loading></Loading>
+        </div>
+      )}
       {reverse.map((item) => (
         <div class="card mt-10 bg-base-100 shadow-xl">
           <div class="card-body grid grid-cols-3 items-center">
