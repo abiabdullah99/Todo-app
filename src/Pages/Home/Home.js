@@ -32,6 +32,7 @@ const Home = () => {
   }, []);
   const reverse = [...taskitems].reverse();
 
+
   const handleCompelete = (task) => {
     const items = {
       complet: task,
